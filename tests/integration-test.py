@@ -17,22 +17,26 @@ def test_post_valid(self):
 
 #Establish a connection to the database directly and verify that the string you sent has been correctly stored in the database. 
 #For this step, you can use SQLAlchemy, or write the SQL directly if you prefer, however note that this is a postgres database which does have subtly different syntax from sqlite. (For simple queries this shouldn't be a big issue.)
+
+
+DATABASE_URI = 'postgresql://cs162_user:cs162_password@db/cs162'
+engine = create_engine(DATABASE_URI)
+connection = engine.connect()
+metadata = MetaData(engine)
 Base = declarative_base()
 class Data(Base):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String(200))
+Base.metadata.create_all(engine)
 
-DATABASE_URI = 'postgresql://cs162_user:cs162_password@db/cs162'
-engine = create_engine(DATABASE_URI)
-
-metadata = MetaData(engine)
-data = Table('Data', metadata, autoload=True)
+data = db.Table('Data', metadata, autoload=True)
 
 Session = sessionmaker(bind=engine)
 session = Session() 
 
 def test_input(self):
 	session.add(text="Hello CS162")
+    session.commit()
 	q = db.select([Data.columns.id, Data.columns.text]).select_from(Data)
 	result = connection.execute(q).fetchall()[-1]
 
