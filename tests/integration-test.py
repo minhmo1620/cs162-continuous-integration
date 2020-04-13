@@ -29,7 +29,7 @@ class Data(Base):
     text = Column(String(200))
 Base.metadata.create_all(engine)
 
-data = db.Table('Data', metadata, autoload=True)
+Data = db.Table('Data', metadata, autoload=True)
 
 Session = sessionmaker(bind=engine)
 session = Session() 
