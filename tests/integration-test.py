@@ -19,29 +19,29 @@ def test_post_valid(self):
 #For this step, you can use SQLAlchemy, or write the SQL directly if you prefer, however note that this is a postgres database which does have subtly different syntax from sqlite. (For simple queries this shouldn't be a big issue.)
 
 
-DATABASE_URI = 'postgresql://cs162_user:cs162_password@db/cs162'
-engine = create_engine(DATABASE_URI)
-connection = engine.connect()
-metadata = MetaData(engine)
-Base = declarative_base()
-class Data(Base):
-    id = Column(Integer, primary_key=True)
-    text = Column(String(200))
-Base.metadata.create_all(engine)
+# DATABASE_URI = 'postgresql://cs162_user:cs162_password@db/cs162'
+# engine = create_engine(DATABASE_URI)
+# connection = engine.connect()
+# metadata = MetaData(engine)
+# Base = declarative_base()
+# class Data(Base):
+#     id = Column(Integer, primary_key=True)
+#     text = Column(String(200))
+# Base.metadata.create_all(engine)
 
-Session = sessionmaker(bind=engine)
-session = Session() 
-metadata = MetaData()
+# Session = sessionmaker(bind=engine)
+# session = Session() 
+# metadata = MetaData()
 
-session.add(Data(text="Hello CS162"))
-session.commit()
+# session.add(Data(text="Hello CS162"))
+# session.commit()
 
-Data = db.Table('Data', metadata, autoload=True)
-def test_input(self):
-	q = db.select([Data.columns.id, Data.columns.text]).select_from(Data)
-	result = connection.execute(q).fetchall()[-1]
+# Data = db.Table('Data', metadata, autoload=True)
+# def test_input(self):
+# 	q = db.select([Data.columns.id, Data.columns.text]).select_from(Data)
+# 	result = connection.execute(q).fetchall()[-1]
 
-	assertEqual(result, "Hello CS162")
+# 	assertEqual(result, "Hello CS162")
 
 # #POST an HTTP request with an invalid expression to the server. Examine the response and confirm that an error is raised.
 def test_post_invalid(self):
