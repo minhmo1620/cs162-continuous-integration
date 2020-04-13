@@ -38,10 +38,10 @@ def test_post_valid(self):
 # 	assertEqual(result, "Hello CS162")
 
 # #POST an HTTP request with an invalid expression to the server. Examine the response and confirm that an error is raised.
-# def test_post_invalid(self):
-#     expected_result = { "expression": "hello"}
-#     r = requests.get('https://localhost:5000/add', data = expected_result)
-#     assertFalse(r.status_code == 200) 
+def test_post_invalid(self):
+    expected_result = { "expression": "hello"}
+    r = requests.get('https://localhost:5000/add', data = expected_result)
+    assertFalse(r.status_code == 200) 
 #Confirm that no more rows have been added to the database since the last valid expression was sent to the server. 
 #(For the purposes of this class, you can assume that no-one else is accessing the database while the tests are running.)
 
