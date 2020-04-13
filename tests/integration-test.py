@@ -35,7 +35,7 @@ Session = sessionmaker(bind=engine)
 session = Session() 
 
 def test_input(self):
-	session.add(text="Hello CS162")
+	session.add(Data(text="Hello CS162"))
     session.commit()
 	q = db.select([Data.columns.id, Data.columns.text]).select_from(Data)
 	result = connection.execute(q).fetchall()[-1]
