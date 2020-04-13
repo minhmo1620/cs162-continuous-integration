@@ -25,8 +25,8 @@ connection = engine.connect()
 metadata = MetaData(engine)
 Base = declarative_base()
 class Data(Base):
-    id = db.Column(db.Integer, primary_key=True)
-    text = db.Column(db.String(200))
+    id = Column(Integer, primary_key=True)
+    text = Column(String(200))
 Base.metadata.create_all(engine)
 
 data = db.Table('Data', metadata, autoload=True)
